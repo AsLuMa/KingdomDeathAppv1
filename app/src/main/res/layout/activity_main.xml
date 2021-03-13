@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity" android:layout_centerHorizontal="false" android:id="@+id/ConstraintLayout">
+    <Button
+            android:text="@string/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/resetButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginLeft="72dp" android:layout_marginStart="72dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="84dp"/>
+    <Button
+            android:text="@string/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/saveButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="72dp" android:layout_marginRight="72dp"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="84dp"/>
+    <TableLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.498" android:id="@+id/tableLayout">
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/stat_sys_upload"
+                    android:id="@+id/survivalButtonUp"/>
+            <TextView
+                    android:text="@string/survival"
+                    android:textSize="30sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/survivalID"
+
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:layout_marginLeft="10sp" android:layout_marginRight="10sp" android:fontFamily="casual"/>
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/stat_sys_download"
+                    android:id="@+id/survivalButtonDown"/>
+            <TextView
+                    android:text="@string/survivalValueID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/survivalValueID" android:textSize="30sp"
+                    android:layout_marginLeft="20sp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/stat_sys_upload"
+                    android:id="@+id/insanityButtonUp"/>
+            <TextView
+                    android:text="@string/insanity"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/insanityID"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" android:textSize="30sp"
+                    android:layout_gravity="clip_vertical|center_horizontal" android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp" android:fontFamily="casual"/>
+            <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" app:srcCompat="@android:drawable/stat_sys_download"
+                    android:id="@+id/insanityButtonDown"/>
+            <TextView
+                    android:text="@string/insanityValueID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/insanityValueID" android:textSize="30sp"
+                    android:layout_marginLeft="20sp"/>
+        </TableRow>
+    </TableLayout>
+    <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" app:srcCompat="@android:drawable/star_big_on"
+            android:id="@+id/startCharacterSheet"
+            app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toTopOf="@+id/tableLayout"
+            app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.498"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

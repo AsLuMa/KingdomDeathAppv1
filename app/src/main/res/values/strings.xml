@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Kingdom Death</string>
+    <string name="insanity">Insanity</string>
+    <string name="survival">Survival</string>
+    <string name="survivalValueID">0</string>
+    <string name="insanityValueID">0</string>
+
+    <string name="resetButton">Reset</string>
+    <string name="saveButton">Save</string>
+
+    <string name="strength">Strength</string>
+    <string name="strengthValueID">0</string>
+
+
+</resources>
