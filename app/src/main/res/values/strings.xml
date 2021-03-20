@@ -1,15 +1,52 @@
 <resources>
     <string name="app_name">Kingdom Death</string>
+
+
     <string name="insanity">Insanity</string>
+    <string name="insanityValueID">0</string>
+
     <string name="survival">Survival</string>
     <string name="survivalValueID">0</string>
-    <string name="insanityValueID">0</string>
 
     <string name="resetButton">Reset</string>
     <string name="saveButton">Save</string>
 
+
+    <!-- Attribute fragment -->
+    <string name="movement">Movement</string>
+    <string name="movementValue">0</string>
+
+    <string name="accuracy">Accuracy</string>
+    <string name="accuracyValue">0</string>
+
     <string name="strength">Strength</string>
-    <string name="strengthValueID">0</string>
+    <string name="strengthValue">0</string>
+
+    <string name="evasion">Evasion</string>
+    <string name="evasionValue">0</string>
+
+    <string name="luck">Luck</string>
+    <string name="luckValue">0</string>
+
+    <string name="speed">Speed</string>
+    <string name="speedValue">0</string>
+
+
+    <!-- Armor fragment -->
+    <string name="head">Head</string>
+    <string name="headValue">0</string>
+
+    <string name="arms">Arms</string>
+    <string name="armsValue">0</string>
+
+    <string name="body">Body</string>
+    <string name="bodyValue">0</string>
+
+    <string name="waist">Waist</string>
+    <string name="waistValue">0</string>
+
+    <string name="legs">Legs</string>
+    <string name="legsValue">0</string>
 
 
 </resources>

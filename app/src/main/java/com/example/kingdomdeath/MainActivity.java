@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String insanity = "insanityKey";
 
     private int currentSurvival;
+
     private int currentInsanity;
 
     private TextView survivalValueID;
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         ImageButton survivalButtonUp = findViewById(R.id.survivalButtonUp);
         ImageButton insanityButtonUp = findViewById(R.id.insanityButtonUp);
+
         ImageButton startCharacterSheet = findViewById(R.id.startCharacterSheet);
 
         ImageButton survivalButtonDown = findViewById(R.id.survivalButtonDown);
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentSurvival++;
-                survivalValueID.setText("" + currentSurvival);
+                updateSurvival(survivalValueID);
             }
         });
 
@@ -73,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInsanity++;
-                insanityValueID.setText("" + currentInsanity);
-
+                updateInsanity(insanityValueID);
             }
         });
 
@@ -82,8 +83,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentSurvival--;
-                survivalValueID.setText("" + currentSurvival);
-
+                updateSurvival(survivalValueID);
             }
         });
 
@@ -91,16 +91,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 currentInsanity--;
-                insanityValueID.setText("" + currentInsanity);
-
+                updateInsanity(insanityValueID);
             }
         });
+
 
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentSurvival = 0;
                 currentInsanity = 0;
+                currentSurvival = 0;
                 survivalValueID.setText("" + currentSurvival);
                 insanityValueID.setText("" + currentInsanity);
 
@@ -114,18 +114,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         startCharacterSheet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent startCharacterSheet = new Intent(MainActivity.this, CharacterSheet.class);
-                startActivity(startCharacterSheet);
-
+                Intent startArmor = new Intent(MainActivity.this, Armor.class);
+                startActivity(startArmor);
             }
         });
 
     }
+
+    public void updateSurvival(TextView view){
+        view.setText("" + currentSurvival);
+    }
+
+    public void updateInsanity(TextView view){
+        view.setText("" + currentInsanity);
+    }
+
+
+
 
     public void save() {
         String s = survivalValueID.getText().toString();
@@ -155,16 +163,13 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(TAG, "load");
 
-
     }
-
 
     @Override
     protected void onStart() {
         super.onStart();
 
         Log.i(TAG, "onStart");
-
     }
 
     @Override
