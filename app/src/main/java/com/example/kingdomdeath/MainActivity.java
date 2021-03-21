@@ -14,6 +14,7 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
+    //logtag to keep track of app lifecycle (filter in logcat)
     private static final String TAG="ActivityState";
 
     //save state
@@ -21,11 +22,11 @@ public class MainActivity extends AppCompatActivity {
     //name of file where things are stored
     public static final String mypreference = "mypref";
 
+    //keys to find associated value (savestate)
     public static final String survival = "survivalKey";
     public static final String insanity = "insanityKey";
 
     private int currentSurvival;
-
     private int currentInsanity;
 
     private TextView survivalValueID;
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //makes GUI + load saved values + onclick listener for buttons
+    //refactor buttons to onclick(View view)-methods through designer?
     public void startGUI(){
         survivalValueID = (TextView) findViewById(R.id.survivalValueID);
         insanityValueID = (TextView) findViewById(R.id.insanityValueID);
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton survivalButtonUp = findViewById(R.id.survivalButtonUp);
         ImageButton insanityButtonUp = findViewById(R.id.insanityButtonUp);
 
-        ImageButton startCharacterSheet = findViewById(R.id.startCharacterSheet);
+        ImageButton startArmor = findViewById(R.id.startArmor);
 
         ImageButton survivalButtonDown = findViewById(R.id.survivalButtonDown);
         ImageButton insanityButtonDown = findViewById(R.id.insanityButtonDown);
@@ -58,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Button resetButton = findViewById(R.id.resetButton);
         Button saveButton = findViewById(R.id.saveButton);
 
+        //savestate
         sharedPreferences = getSharedPreferences(mypreference,
                 Context.MODE_PRIVATE);
 
@@ -96,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+        //resets survival and insanity values
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +119,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        startCharacterSheet.setOnClickListener(new View.OnClickListener() {
+        //starts
+
+        startArmor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent startArmor = new Intent(MainActivity.this, Armor.class);
@@ -131,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
     public void updateInsanity(TextView view){
         view.setText("" + currentInsanity);
     }
-
-
 
 
     public void save() {
@@ -196,23 +201,13 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 To do:
-- make save/load work
-- move save/load to other class
-- refactor click methods
-
-
-* Log.i(TAG, "string");
-* Refactor - clean up onStart - refactor into methods
-* Save-states
-* Tab-layout
-* Dynamic listview
-*
-* onStart
-* onResume
-* onStop
-* onRestart
-* onDestroy
-* onPause
-* onSaveInstanceState(Bundle outState) etc
-* onRestoreInstanceState(Bundle savedInstanceState) etc
+Move armor to main activity
+Make tab or bottom nav menu for stats (should be main activity)
+Armor - replace +/- buttons with number input button
+Add hamburger-menu (character sheet + stored characters)
+Save: survival/insanity separate from armor
+Figure out how to save all info to character, and make activity with list of characters
+Add logic to armor
+Change app picture
+Surival and insanity: switch location of increment and decrement buttons
 * */
