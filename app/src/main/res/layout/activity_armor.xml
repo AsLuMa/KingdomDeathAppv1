@@ -39,9 +39,9 @@
                     android:layout_marginBottom="10dp" android:visibility="invisible"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox7" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/headHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="headHeavyCheckbox"/>
         </TableRow>
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/armsHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="armsHeavyCheckbox"/>
         </TableRow>
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -88,12 +88,12 @@
                     android:layout_marginRight="10dp" android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox5" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/bodyLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox10" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/bodyHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
         </TableRow>
@@ -115,12 +115,12 @@
                     android:layout_marginRight="10dp" android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox6" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/waistLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox11" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/waistHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
         </TableRow>
@@ -142,12 +142,12 @@
                     android:layout_marginRight="10dp" android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/checkBox4" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/legsLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
             <CheckBox
                     android:layout_width="30dp"
-                    android:layout_height="match_parent" android:id="@+id/checkBox9" android:layout_marginLeft="0dp"
+                    android:layout_height="match_parent" android:id="@+id/legsHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="10dp"/>
         </TableRow>
