@@ -90,12 +90,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/bodyLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="bodyLightCheckbox"/>
             <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/bodyHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="bodyHeavyCheckbox"/>
         </TableRow>
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -117,12 +117,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/waistLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="waistLightCheckbox"/>
             <CheckBox
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/waistHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="waistHeavyCheckbox"/>
         </TableRow>
         <TableRow android:layout_width="match_parent" android:layout_height="match_parent">
 
@@ -144,12 +144,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" android:id="@+id/legsLightID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="legsLightCheckbox"/>
             <CheckBox
                     android:layout_width="30dp"
                     android:layout_height="match_parent" android:id="@+id/legsHeavyID" android:layout_marginLeft="0dp"
                     android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="10dp" android:onClick="legsHeavyCheckbox"/>
         </TableRow>
     </TableLayout>
 

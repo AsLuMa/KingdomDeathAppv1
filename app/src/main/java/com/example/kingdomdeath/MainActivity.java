@@ -119,8 +119,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //starts
-
+        //starts Armor activity
         startArmor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         //sharedPreferences = getSharedPreferences(mypreference,
           //      Context.MODE_PRIVATE);
 
-        //had to do some shenanigans with '"" + int' in order to set text as a String in textView, while treating the number as an int
+        //use  '"" + int' in order to set text as a String in textView - and int can be treated as int
 
         if (sharedPreferences.contains(survival)) {
             survivalValueID.setText("" + sharedPreferences.getInt(survival, -1));
@@ -200,14 +199,11 @@ public class MainActivity extends AppCompatActivity {
 }
 
 /*
-To do:
-Move armor to main activity
-Make tab or bottom nav menu for stats (should be main activity)
-Armor - replace +/- buttons with number input button
-Add hamburger-menu (character sheet + stored characters)
-Save: survival/insanity separate from armor
-Figure out how to save all info to character, and make activity with list of characters
-Add logic to armor
-Change app picture
-Surival and insanity: switch location of increment and decrement buttons
-* */
+TODO:
+- Move Armor to MainActivity - refactor to fragment in MainActivity
+- MainActivity - make either tab or bottom nav menu
+- Figure out how to save after refactor: same file? SharedPreferences or Database
+- New Feature: save all info input as an object, make editable list of characters (SQlite)
+- Fix save-state of Armor-class (checkboxes don't work correctly)
+- Limit input: survival and insanity shouldn't go below zero; no more than two numbers for armor
+*/

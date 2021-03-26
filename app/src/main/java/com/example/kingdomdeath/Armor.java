@@ -16,7 +16,8 @@ public class Armor extends AppCompatActivity {
 
     private SharedPreferences sharedPreferences;
 
-    //name of file where things are stored
+    //name of file where armor values and checkbox state is stored
+    //this save-file is separate from the save-file in MainActivity
     public static final String armorpref = "armorpref";
 
     //keys to find associated value (savestate)
@@ -39,7 +40,7 @@ public class Armor extends AppCompatActivity {
     public static final String legsLight = "legsLight";
     public static final String legsHeavy = "legsHeavy";
 
-    //tried to make Armor-object to put into SharedPreferences, but need to download gson-something to do that
+    //look into gson to make Armor-object (with name of armor-location as key) to put into SharedPreferences
     //refactor to database storage/sqlite
 
     //head
@@ -87,7 +88,9 @@ public class Armor extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_armor);
 
+        //*editText = view where armor value is entered
         headEditText = (EditText) findViewById(R.id.headValue);
+        //*heavy/lightCB = checkbox where you can check whether character has light or heavy wound
         headHeavyCB = (CheckBox) findViewById(R.id.headHeavyID);
 
         armsEditText = (EditText) findViewById(R.id.armsValue);
@@ -109,12 +112,13 @@ public class Armor extends AppCompatActivity {
         legsLightCB = (CheckBox) findViewById(R.id.legsLightID);
         legsHeavyCB = (CheckBox) findViewById(R.id.legsHeavyID);
 
+        //Button that switches to main activity
         ImageButton startMain = findViewById(R.id.startMain);
 
         Button saveButton2 = findViewById(R.id.saveButton2);
         Button resetButton2 = findViewById(R.id.resetButton2);
 
-        //savestate
+        //Initialized savesavestaed - MODE_PRIVATE = data only accessible to app
         sharedPreferences = getSharedPreferences(armorpref,
                 Context.MODE_PRIVATE);
 
@@ -153,7 +157,7 @@ public class Armor extends AppCompatActivity {
                 waistEditText.setText(waistValue);
 
                 legsValue = "" + 0;
-                legsEditText.setText(armsValue);
+                legsEditText.setText(legsValue);
 
                 if(headHeavyCB.isChecked()){
                     headHeavyCB.setChecked(false);
@@ -183,18 +187,29 @@ public class Armor extends AppCompatActivity {
                     waistHeavyCB.setChecked(false);
                 }
 
-                if(armsLightCB.isChecked()){
-                    armsLightCB.setChecked(false);
+                if(legsLightCB.isChecked()){
+                    legsLightCB.setChecked(false);
                 }
 
-                if(armsHeavyCB.isChecked()){
-                    armsHeavyCB.setChecked(false);
+                if(legsHeavyCB.isChecked()){
+                    legsHeavyCB.setChecked(false);
                 }
-
-
 
             }
         });
+
+    }
+
+    public void headHeavyCheckbox(View view){
+        if(headHeavyCB.isChecked()){
+            headHeavyCB.setChecked(true);
+            headHeavyBoolean = headHeavyCB.isChecked();
+        }
+
+        else if(!headHeavyCB.isChecked()){
+            headHeavyCB.setChecked(false);
+            headHeavyBoolean = headHeavyCB.isChecked();
+        }
 
     }
 
@@ -223,60 +238,164 @@ public class Armor extends AppCompatActivity {
         }
     }
 
-    public void headHeavyCheckbox(View view){
-        if(headHeavyCB.isChecked()){
-            headHeavyCB.setChecked(true);
-            headHeavyBoolean = headHeavyCB.isChecked();
+    public void bodyLightCheckbox(View view){
+        if(bodyLightCB.isChecked()){
+            bodyLightCB.setChecked(true);
+            bodyLightBoolean = bodyLightCB.isChecked();
         }
 
-        else if(!headHeavyCB.isChecked()){
-            headHeavyCB.setChecked(false);
-            headHeavyBoolean = headHeavyCB.isChecked();
+        else if(!bodyLightCB.isChecked()){
+            bodyLightCB.setChecked(false);
+            bodyLightBoolean = armsLightCB.isChecked();
         }
 
     }
 
+    public void bodyHeavyCheckbox(View view){
+        if(bodyHeavyCB.isChecked()){
+            bodyHeavyCB.setChecked(true);
+            bodyHeavyBoolean = bodyHeavyCB.isChecked();
+        }
+
+        else if(!bodyHeavyCB.isChecked()){
+            bodyHeavyCB.setChecked(false);
+            bodyHeavyBoolean = armsHeavyCB.isChecked();
+        }
+    }
+
+    public void waistLightCheckbox(View view){
+        if(waistLightCB.isChecked()){
+            waistLightCB.setChecked(true);
+            waistLightBoolean = waistLightCB.isChecked();
+        }
+
+        else if(!waistLightCB.isChecked()){
+            waistLightCB.setChecked(false);
+            waistLightBoolean = waistLightCB.isChecked();
+        }
+
+    }
+
+    public void waistHeavyCheckbox(View view){
+        if(waistHeavyCB.isChecked()){
+            waistHeavyCB.setChecked(true);
+            waistHeavyBoolean = armsHeavyCB.isChecked();
+        }
+
+        else if(!waistHeavyCB.isChecked()){
+            waistHeavyCB.setChecked(false);
+            waistHeavyBoolean = armsHeavyCB.isChecked();
+        }
+    }
+
+    public void legsLightCheckbox(View view){
+        if(legsLightCB.isChecked()){
+            legsLightCB.setChecked(true);
+            legsLightBoolean = legsLightCB.isChecked();
+        }
+
+        else if(!legsLightCB.isChecked()){
+            legsLightCB.setChecked(false);
+            legsLightBoolean = legsLightCB.isChecked();
+        }
+
+    }
+
+    public void legsHeavyCheckbox(View view){
+        if(legsHeavyCB.isChecked()){
+            legsHeavyCB.setChecked(true);
+            legsHeavyBoolean = legsHeavyCB.isChecked();
+        }
+
+        else if(!legsHeavyCB.isChecked()){
+            legsHeavyCB.setChecked(false);
+            legsHeavyBoolean = legsHeavyCB.isChecked();
+        }
+    }
+
+
+    //savestated doesn't work right with the checkboxes - when you check a box, save, quit, open app, check two more boxes, save quit and open - it seems to toggle buttons in stead of preserve state? check "isChecked() and setChecked(boolean) - how do they work? need to fix several methods
+
 
     public void save(){
 
-        armsValue = armsEditText.getText().toString();
+        //get value from editText-view
         headValue = headEditText.getText().toString();
+        armsValue = armsEditText.getText().toString();
+        bodyValue = bodyEditText.getText().toString();
+        waistValue = waistEditText.getText().toString();
+        legsValue = legsEditText.getText().toString();
 
+        //open editor (savestate)
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        //save value from editText-field to file
+        if (!"".equals(headValue)){
+            editor.putInt(headKey, Integer.parseInt(headValue));
+        }
 
         if (!"".equals(armsValue)){
             editor.putInt(armsKey, Integer.parseInt(armsValue));
         }
 
-        if (!"".equals(headValue)){
-            editor.putInt(headKey, Integer.parseInt(headValue));
+        if (!"".equals(bodyValue)){
+            editor.putInt(bodyKey, Integer.parseInt(bodyValue));
         }
 
+        if (!"".equals(waistValue)){
+            editor.putInt(waistKey, Integer.parseInt(waistValue));
+        }
+
+        if (!"".equals(legsValue)){
+            editor.putInt(legsKey, Integer.parseInt(legsValue));
+        }
+
+        editor.putBoolean(headHeavy, headHeavyBoolean);
         editor.putBoolean(armsLight, armsLightBoolean);
         editor.putBoolean(armsHeavy, armsHeavyBoolean);
-        editor.putBoolean(headHeavy, headHeavyBoolean);
+        editor.putBoolean(bodyLight, bodyLightBoolean);
+        editor.putBoolean(bodyHeavy, bodyHeavyBoolean);
+        editor.putBoolean(waistLight, waistLightBoolean);
+        editor.putBoolean(waistHeavy, waistHeavyBoolean);
+        editor.putBoolean(legsLight, legsLightBoolean);
+        editor.putBoolean(legsHeavy, legsHeavyBoolean);
+
         editor.commit();
-
-
 
     }
 
 
     public void load(){
 
-        if (sharedPreferences.contains(armsKey)) {
-            armsEditText.setText("" + sharedPreferences.getInt(armsKey, -1));
-        }
-
         if (sharedPreferences.contains(headKey)) {
             headEditText.setText("" + sharedPreferences.getInt(headKey, -1));
         }
 
+        if (sharedPreferences.contains(armsKey)) {
+            armsEditText.setText("" + sharedPreferences.getInt(armsKey, -1));
+        }
 
-        armsLightCB.setChecked(sharedPreferences.getBoolean(armsLight, armsLightBoolean));
-        armsHeavyCB.setChecked(sharedPreferences.getBoolean(armsHeavy, armsHeavyBoolean));
+        if (sharedPreferences.contains(bodyKey)) {
+            bodyEditText.setText("" + sharedPreferences.getInt(bodyKey, -1));
+        }
+
+        if (sharedPreferences.contains(waistKey)) {
+            waistEditText.setText("" + sharedPreferences.getInt(waistKey, -1));
+        }
+
+        if (sharedPreferences.contains(legsKey)) {
+            legsEditText.setText("" + sharedPreferences.getInt(legsKey, -1));
+        }
 
         headHeavyCB.setChecked(sharedPreferences.getBoolean(headHeavy, headHeavyBoolean));
+        armsLightCB.setChecked(sharedPreferences.getBoolean(armsLight, armsLightBoolean));
+        armsHeavyCB.setChecked(sharedPreferences.getBoolean(armsHeavy, armsHeavyBoolean));
+        bodyLightCB.setChecked(sharedPreferences.getBoolean(bodyLight, bodyLightBoolean));
+        bodyHeavyCB.setChecked(sharedPreferences.getBoolean(bodyHeavy, bodyHeavyBoolean));
+        waistLightCB.setChecked(sharedPreferences.getBoolean(waistLight, waistLightBoolean));
+        waistHeavyCB.setChecked(sharedPreferences.getBoolean(waistHeavy, waistHeavyBoolean));
+        legsLightCB.setChecked(sharedPreferences.getBoolean(legsLight, legsLightBoolean));
+        legsHeavyCB.setChecked(sharedPreferences.getBoolean(legsHeavy, legsHeavyBoolean));
 
     }
 }
