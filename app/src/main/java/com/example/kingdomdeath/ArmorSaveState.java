@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 public class ArmorSaveState {
     //Class that creates object for one row of the table
+    //Intended to create objects to be saved with SharedPreferences, but SP doesn't take objects
     //Object has the following variables (corresponds to views in activity_armor): EditText (save number entered), light wound (boolean), heavy wound (boolean)
     //TextView not included - we do not need to store the state of the TextView
     //Need to make hashmap where key is name of the stat (String)
