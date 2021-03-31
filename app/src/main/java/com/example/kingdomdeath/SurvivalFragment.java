@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SurvivalFragment#newInstance} factory method to
+ * Use the SurvivalFragment#newInstance factory method to
  * create an instance of this fragment.
  */
 public class SurvivalFragment extends Fragment {
@@ -30,12 +30,12 @@ public class SurvivalFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
+     //* @param param1 Parameter 1.
      //* @param param2 Parameter 2.
      * @return A new instance of fragment SurvivalFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SurvivalFragment newInstance(String param1) {
+   /* public static SurvivalFragment newInstance(String param1) {
         SurvivalFragment fragment = new SurvivalFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
@@ -44,6 +44,8 @@ public class SurvivalFragment extends Fragment {
         return fragment;
     }
 
+    */
+/*
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +54,8 @@ public class SurvivalFragment extends Fragment {
             //mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    */
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,3 +64,15 @@ public class SurvivalFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_survival, container, false);
     }
 }
+
+/*
+
+//TODO Alt-method from Udacity - do we need to attach to root or not?
+@Override
+public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                    Bundle savedInstanceState) {
+   View rootView = inflater.inflate(R.layout.word_list, container, false);
+
+   return rootView;
+           }
+ */

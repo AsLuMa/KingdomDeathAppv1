@@ -1,25 +1,16 @@
 package com.example.kingdomdeath;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -53,24 +44,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.ConstraintLayout, new SurvivalFragment())
+                .commit();
 
-        // Find the view pager that will allow the user to swipe between fragments
-        ViewPager survivalTabViewPager = (ViewPager) findViewById(R.id.survivalTabViewPager);
+        //Find the view pager that will allow the user to swipe between fragments
+        //ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
 
 
-        // Create an adapter that knows which fragment should be shown on each page
-        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        //Create an adapter that knows which fragment should be shown on each page
+        //MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
 
-        // Set the adapter onto the view pager
-        survivalTabViewPager.setAdapter(adapter);
+        //Set the adapter onto the view pager
+        //viewPager.setAdapter(adapter);
 
-        //missing tablayout! also need to set the names and content of tabs
+        //TODO missing tablayout! also need to set the names and content of tabs
         //TabLayout tl = findViewById(R.id.tablayout);
 
 
 
 
-        startGUI();
+        //startGUI();
 
     }
 
@@ -167,14 +161,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
-
-
-
-
 
 
 

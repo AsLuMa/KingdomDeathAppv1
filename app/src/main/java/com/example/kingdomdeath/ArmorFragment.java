@@ -59,5 +59,6 @@ public class ArmorFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_armor, container, false);
+        //TODO should fragment_armor here instead be the name of the layout?
     }
 }
