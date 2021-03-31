@@ -53,6 +53,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // Find the view pager that will allow the user to swipe between fragments
+        ViewPager survivalTabViewPager = (ViewPager) findViewById(R.id.survivalTabViewPager);
+
+
+        // Create an adapter that knows which fragment should be shown on each page
+        MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+
+        // Set the adapter onto the view pager
+        survivalTabViewPager.setAdapter(adapter);
+
+        //missing tablayout! also need to set the names and content of tabs
+        //TabLayout tl = findViewById(R.id.tablayout);
+
+
+
+
         startGUI();
 
     }
@@ -231,6 +248,14 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 TODO:
+- FragmentPageAdapter provides a different Fragment for each 'page' (tab)
+- ViewPager = slide mellom skjermer - på sikt?
+- Refactor Armor-activity into ArmorFragment
+- Delete Armor-activity after refactor (all tabs should have same heading - KingdomDeath - means they are in the same activity)
+-
+
+
+
 - Move Armor to MainActivity - refactor to fragment in MainActivity
 - MainActivity - make either tab or bottom nav menu
 - All Activities - add menu bar
