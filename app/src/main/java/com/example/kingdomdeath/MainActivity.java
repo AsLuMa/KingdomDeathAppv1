@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
 
@@ -44,22 +45,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.ConstraintLayout, new SurvivalFragment())
-                .commit();
-
-        //Find the view pager that will allow the user to swipe between fragments
-        //ViewPager viewPager = (ViewPager) findViewById(R.id.viewPager);
-
-
         //Create an adapter that knows which fragment should be shown on each page
-        //MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager());
+        final MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
 
-        //Set the adapter onto the view pager
-        //viewPager.setAdapter(adapter);
+        //getSupportFragmentManager().beginTransaction()
+               // .replace(R.id.ConstraintLayout, new SurvivalFragment())
+               // .commit();
 
-        //TODO missing tablayout! also need to set the names and content of tabs
-        //TabLayout tl = findViewById(R.id.tablayout);
+        TabLayout tl = findViewById(R.id.tablayout);
+
+        tl.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+            @Override
+            public void onTabSelected(TabLayout.Tab tab){
+                int position = tab.getPosition();
+                getSupportFragmentManager().beginTransaction()
+                 .replace(R.id.ConstraintLayout, adapter.getItem(position))
+                 .commit();
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
 
 
