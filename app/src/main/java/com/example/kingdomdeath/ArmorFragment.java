@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 public class ArmorFragment extends Fragment {
 
@@ -55,6 +58,7 @@ public class ArmorFragment extends Fragment {
 
     //look into gson to make Armor-object (with name of armor-location as key) to put into SharedPreferences
     //refactor to database storage/sqlite
+
 
     //head
     private EditText headEditText;
@@ -96,6 +100,7 @@ public class ArmorFragment extends Fragment {
     private CheckBox legsHeavyCB;
     private boolean legsHeavyBoolean;
 
+    private List<EditText> listEditText;
 
     public ArmorFragment() {
         // Required empty public constructor
@@ -129,26 +134,26 @@ public class ArmorFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //*editText = view where armor value is entered
-        headEditText = (EditText) view.findViewById(R.id.headValue);
+        //headEditText = (EditText) view.findViewById(R.id.headValue);
         //*heavy/lightCB = checkbox where you can check whether character has light or heavy wound
         headHeavyCB = (CheckBox) view.findViewById(R.id.headHeavyID);
 
-        armsEditText = (EditText) view.findViewById(R.id.armsValue);
+        //armsEditText = (EditText) view.findViewById(R.id.armsValue);
         armsLightCB = (CheckBox) view.findViewById(R.id.armsLightID);
         armsHeavyCB = (CheckBox) view.findViewById(R.id.armsHeavyID);
 
         //body
-        bodyEditText = (EditText) view.findViewById(R.id.bodyValue);
+        //bodyEditText = (EditText) view.findViewById(R.id.bodyValue);
         bodyLightCB = (CheckBox) view.findViewById(R.id.bodyLightID);
         bodyHeavyCB = (CheckBox) view.findViewById(R.id.bodyHeavyID);
 
         //waist
-        waistEditText = (EditText) view.findViewById(R.id.waistValue);
+        //waistEditText = (EditText) view.findViewById(R.id.waistValue);
         waistLightCB = (CheckBox) view.findViewById(R.id.waistLightID);
         waistHeavyCB = (CheckBox) view.findViewById(R.id.waistHeavyID);
 
         //legs
-        legsEditText = (EditText) view.findViewById(R.id.legsValue);
+        //legsEditText = (EditText) view.findViewById(R.id.legsValue);
         legsLightCB = (CheckBox) view.findViewById(R.id.legsLightID);
         legsHeavyCB = (CheckBox) view.findViewById(R.id.legsHeavyID);
 
@@ -157,6 +162,13 @@ public class ArmorFragment extends Fragment {
 
         Button saveButton2 = view.findViewById(R.id.saveButton2);
         final Button resetButton2 = view.findViewById(R.id.resetButton2);
+
+        this.listEditText = Arrays.asList(
+                headEditText = view.findViewById(R.id.headValue),
+                armsEditText = view.findViewById(R.id.armsValue),
+                bodyEditText = view.findViewById(R.id.bodyValue),
+                waistEditText = view.findViewById(R.id.waistValue),
+                legsEditText = view.findViewById(R.id.legsValue));
 
         //Initialized savesavestaed - MODE_PRIVATE = data only accessible to app
         sharedPreferences = this.getActivity().getSharedPreferences(armorpref,
@@ -184,11 +196,16 @@ public class ArmorFragment extends Fragment {
         resetButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetValue(headEditText);
+
+                for (EditText var : listEditText){
+                    resetValue(var);
+                }
+
+                /*resetValue(headEditText);
                 resetValue(armsEditText);
                 resetValue(bodyEditText);
                 resetValue(waistEditText);
-                resetValue(legsEditText);
+                resetValue(legsEditText);*/
 
                 resetCheckBox(headHeavyCB);
                 resetCheckBox(armsLightCB);

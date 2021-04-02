@@ -22,7 +22,7 @@ public class SurvivalFragment extends Fragment {
     private static final String ARG_SURVIVAL = "survival";
 
 
-    // TODO: Figure out what this does (if anything)
+    // TODO: Figure out what this does
     private int survivalPage;
 
 
@@ -185,18 +185,6 @@ public class SurvivalFragment extends Fragment {
 
 
 }
-
-/*
-
-//TODO Alt-method from Udacity - do we need to attach to root or not?
-@Override
-public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                    Bundle savedInstanceState) {
-   View rootView = inflater.inflate(R.layout.word_list, container, false);
-
-   return rootView;
-           }
- */
 
 /*XML for skull button, in case of emergency:
         <ImageButton
