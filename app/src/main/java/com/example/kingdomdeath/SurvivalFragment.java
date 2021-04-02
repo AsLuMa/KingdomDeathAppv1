@@ -14,11 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the SurvivalFragment#newInstance factory method to
- * create an instance of this fragment.
- */
+
 public class SurvivalFragment extends Fragment {
 
     // TODO: Figure out what this does
@@ -46,8 +42,6 @@ public class SurvivalFragment extends Fragment {
     private TextView insanityValueID;
 
 
-
-
     public SurvivalFragment() {
         // Required empty public constructor
     }
@@ -58,7 +52,6 @@ public class SurvivalFragment extends Fragment {
         SurvivalFragment fragment = new SurvivalFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SURVIVAL, i);
-        //args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -189,10 +182,6 @@ public class SurvivalFragment extends Fragment {
 
 
     }
-
-
-
-
 
 
 }
