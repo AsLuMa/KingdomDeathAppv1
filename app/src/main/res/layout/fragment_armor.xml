@@ -4,13 +4,11 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent"
              tools:context=".ArmorFragment" android:id="@+id/armorFrame">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".Armor">
+            tools:context=".ArmorFragment">
 
         <TableLayout
                 android:layout_width="272dp"
@@ -158,27 +156,21 @@
             </TableRow>
         </TableLayout>
 
-        <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" app:srcCompat="@drawable/skull" android:id="@+id/startMain"
-                app:layout_constraintBottom_toTopOf="@+id/tableLayout2" app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"
-                android:background="#000000"
-                android:padding="1dp"/>
         <Button
                 android:text="@string/resetButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/resetButton2"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginLeft="72dp" android:layout_marginStart="72dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="80dp"/>
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="64dp"/>
         <Button
                 android:text="@string/saveButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/saveButton2"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="72dp" android:layout_marginRight="72dp"
-                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="80dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="64dp"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
+

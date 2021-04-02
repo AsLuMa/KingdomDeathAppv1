@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 
@@ -21,25 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="ActivityState";
 
 
-
-    //save state
-    private SharedPreferences sharedPreferences;
-    //name of file where things are stored
-    public static final String mypreference = "mypref";
-
-    //keys to find associated value (savestate)
-    public static final String survival = "survivalKey";
-    public static final String insanity = "insanityKey";
-
-    private int currentSurvival;
-    private int currentInsanity;
-
-    private TextView survivalValueID;
-    private TextView insanityValueID;
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +30,14 @@ public class MainActivity extends AppCompatActivity {
         //Create an adapter that knows which fragment should be shown on each page
         final MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
 
-        //getSupportFragmentManager().beginTransaction()
-               // .replace(R.id.ConstraintLayout, new SurvivalFragment())
-               // .commit();
 
         TabLayout tl = findViewById(R.id.tablayout);
+
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.ConstraintLayout, adapter.getItem(0))
+                .commit();
+
 
         tl.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
             @Override
@@ -61,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction()
                  .replace(R.id.ConstraintLayout, adapter.getItem(position))
                  .commit();
-
 
             }
 
@@ -77,146 +61,18 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
-        //startGUI();
-
     }
 
-    //makes GUI + load saved values + onclick listener for buttons
-    //refactor buttons to onclick(View view)-methods through designer?
-    public void startGUI(){
-        survivalValueID = (TextView) findViewById(R.id.survivalValueID);
-        insanityValueID = (TextView) findViewById(R.id.insanityValueID);
-
-        ImageButton survivalButtonUp = findViewById(R.id.survivalButtonUp);
-        ImageButton insanityButtonUp = findViewById(R.id.insanityButtonUp);
-
-        ImageButton startArmor = findViewById(R.id.startArmor);
-
-        ImageButton survivalButtonDown = findViewById(R.id.survivalButtonDown);
-        ImageButton insanityButtonDown = findViewById(R.id.insanityButtonDown);
-
-        Button resetButton = findViewById(R.id.resetButton);
-        Button saveButton = findViewById(R.id.saveButton);
-
-        //savestate
-        sharedPreferences = getSharedPreferences(mypreference,
-                Context.MODE_PRIVATE);
-
-        load();
-
-        survivalButtonUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentSurvival++;
-                updateSurvival(survivalValueID);
-            }
-        });
-
-        insanityButtonUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentInsanity++;
-                updateInsanity(insanityValueID);
-            }
-        });
-
-        survivalButtonDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentSurvival--;
-                updateSurvival(survivalValueID);
-            }
-        });
-
-        insanityButtonDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentInsanity--;
-                updateInsanity(insanityValueID);
-            }
-        });
-
-
-        //resets survival and insanity values
-        resetButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentInsanity = 0;
-                currentSurvival = 0;
-                survivalValueID.setText("" + currentSurvival);
-                insanityValueID.setText("" + currentInsanity);
-
-            }
-        });
-
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                save();
-            }
-        });
 
         //starts Armor activity
-        startArmor.setOnClickListener(new View.OnClickListener() {
+        /*startArmor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent startArmor = new Intent(MainActivity.this, Armor.class);
                 startActivity(startArmor);
             }
-        });
+        });*/
 
-
-
-
-
-
-
-
-
-    }
-
-
-
-    public void updateSurvival(TextView view){
-        view.setText("" + currentSurvival);
-    }
-
-    public void updateInsanity(TextView view){
-        view.setText("" + currentInsanity);
-    }
-
-
-    public void save() {
-        String s = survivalValueID.getText().toString();
-        String i = insanityValueID.getText().toString();
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(survival, Integer.parseInt(s));
-        editor.putInt(insanity, Integer.parseInt(i));
-        editor.commit();
-
-        Log.i(TAG, "save");
-    }
-
-    public void load() {
-
-        //sharedPreferences = getSharedPreferences(mypreference,
-          //      Context.MODE_PRIVATE);
-
-        //use  '"" + int' in order to set text as a String in textView - and int can be treated as int
-
-        if (sharedPreferences.contains(survival)) {
-            survivalValueID.setText("" + sharedPreferences.getInt(survival, -1));
-        }
-        if (sharedPreferences.contains(insanity)) {
-            insanityValueID.setText("" + sharedPreferences.getInt(insanity, -1));
-        }
-
-        Log.i(TAG, "load");
-
-    }
 
     @Override
     protected void onStart() {
@@ -249,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 TODO:
+- Read about non-deprecated way to do this
+- Understand tablayout-logic
 - FragmentPageAdapter provides a different Fragment for each 'page' (tab)
 - ViewPager = slide mellom skjermer - på sikt?
 - Refactor Armor-activity into ArmorFragment
