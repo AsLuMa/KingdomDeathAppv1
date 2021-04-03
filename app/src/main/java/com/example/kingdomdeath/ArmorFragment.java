@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -16,8 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.fragment.app.FragmentManager;
 
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 public class ArmorFragment extends Fragment {
@@ -101,6 +102,8 @@ public class ArmorFragment extends Fragment {
     private boolean legsHeavyBoolean;
 
     private List<EditText> listEditText;
+    private List<CheckBox> listCheckBoxWounds;
+    private Map<CheckBox, Boolean> woundMap = new HashMap<>();
 
     public ArmorFragment() {
         // Required empty public constructor
@@ -125,6 +128,7 @@ public class ArmorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("OnCreateView");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_armor, container, false);
     }
@@ -132,58 +136,55 @@ public class ArmorFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        System.out.println("OnViewCreated");
 
-        //*editText = view where armor value is entered
-        //headEditText = (EditText) view.findViewById(R.id.headValue);
-        //*heavy/lightCB = checkbox where you can check whether character has light or heavy wound
-        headHeavyCB = (CheckBox) view.findViewById(R.id.headHeavyID);
-
-        //armsEditText = (EditText) view.findViewById(R.id.armsValue);
-        armsLightCB = (CheckBox) view.findViewById(R.id.armsLightID);
-        armsHeavyCB = (CheckBox) view.findViewById(R.id.armsHeavyID);
-
-        //body
-        //bodyEditText = (EditText) view.findViewById(R.id.bodyValue);
-        bodyLightCB = (CheckBox) view.findViewById(R.id.bodyLightID);
-        bodyHeavyCB = (CheckBox) view.findViewById(R.id.bodyHeavyID);
-
-        //waist
-        //waistEditText = (EditText) view.findViewById(R.id.waistValue);
-        waistLightCB = (CheckBox) view.findViewById(R.id.waistLightID);
-        waistHeavyCB = (CheckBox) view.findViewById(R.id.waistHeavyID);
-
-        //legs
-        //legsEditText = (EditText) view.findViewById(R.id.legsValue);
-        legsLightCB = (CheckBox) view.findViewById(R.id.legsLightID);
-        legsHeavyCB = (CheckBox) view.findViewById(R.id.legsHeavyID);
-
-        //Button that switches to main activity
-        ImageButton startMain = view.findViewById(R.id.startMain);
 
         Button saveButton2 = view.findViewById(R.id.saveButton2);
         final Button resetButton2 = view.findViewById(R.id.resetButton2);
 
+
+        //list of EditText where armor-number is input
         this.listEditText = Arrays.asList(
                 headEditText = view.findViewById(R.id.headValue),
                 armsEditText = view.findViewById(R.id.armsValue),
                 bodyEditText = view.findViewById(R.id.bodyValue),
                 waistEditText = view.findViewById(R.id.waistValue),
-                legsEditText = view.findViewById(R.id.legsValue));
+                legsEditText = view.findViewById(R.id.legsValue)
+        );
+
+        //list of Checkboxes for light wounds
+        this.listCheckBoxWounds = Arrays.asList(
+                armsLightCB = (CheckBox) view.findViewById(R.id.armsLightID),
+                bodyLightCB = (CheckBox) view.findViewById(R.id.bodyLightID),
+                waistLightCB = (CheckBox) view.findViewById(R.id.waistLightID),
+                legsLightCB = (CheckBox) view.findViewById(R.id.legsLightID),
+                headHeavyCB = (CheckBox) view.findViewById(R.id.headHeavyID),
+                armsHeavyCB = (CheckBox) view.findViewById(R.id.armsHeavyID),
+                bodyHeavyCB = (CheckBox) view.findViewById(R.id.bodyHeavyID),
+                waistHeavyCB = (CheckBox) view.findViewById(R.id.waistHeavyID),
+                legsHeavyCB = (CheckBox) view.findViewById(R.id.legsHeavyID
+                )
+        );
 
         //Initialized savesavestaed - MODE_PRIVATE = data only accessible to app
         sharedPreferences = this.getActivity().getSharedPreferences(armorpref,
                 Context.MODE_PRIVATE);
 
+        woundMap.put(headHeavyCB, this.headHeavyBoolean);
+        woundMap.put(armsLightCB, this.armsLightBoolean);
+        woundMap.put(armsHeavyCB, this.armsHeavyBoolean);
+        woundMap.put(bodyLightCB, this.bodyLightBoolean);
+        woundMap.put(bodyHeavyCB, this.bodyHeavyBoolean);
+        woundMap.put(waistLightCB, this.waistLightBoolean);
+        woundMap.put(waistHeavyCB, this.waistHeavyBoolean);
+        woundMap.put(legsLightCB, this.legsLightBoolean);
+        woundMap.put(legsHeavyCB, this.legsHeavyBoolean);
+        System.out.println("After put: " + headHeavyBoolean);
+
+
+
+
         load();
-
-
-        /*startMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent startMain = new Intent(Armor.this, MainActivity.class);
-                startActivity(startMain);
-            }
-        });*/
 
 
         saveButton2.setOnClickListener(new View.OnClickListener() {
@@ -197,153 +198,104 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                for (EditText var : listEditText){
+                for (EditText var : listEditText) {
                     resetValue(var);
                 }
 
-                /*resetValue(headEditText);
-                resetValue(armsEditText);
-                resetValue(bodyEditText);
-                resetValue(waistEditText);
-                resetValue(legsEditText);*/
-
-                resetCheckBox(headHeavyCB);
-                resetCheckBox(armsLightCB);
-                resetCheckBox(armsHeavyCB);
-                resetCheckBox(bodyLightCB);
-                resetCheckBox(bodyHeavyCB);
-                resetCheckBox(waistLightCB);
-                resetCheckBox(waistHeavyCB);
-                resetCheckBox(legsLightCB);
-                resetCheckBox(legsHeavyCB);
+                for (CheckBox var : listCheckBoxWounds) {
+                    resetCheckBox(var);
+                }
             }
         });
 
-        headHeavyCB.setOnClickListener(new View.OnClickListener() {
+       headHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(headHeavyCB.isChecked()){
-                    headHeavyCB.setChecked(true);
-                    headHeavyBoolean = headHeavyCB.isChecked();
-                }
-
-                else if(!headHeavyCB.isChecked()){
-                    headHeavyCB.setChecked(false);
-                    headHeavyBoolean = headHeavyCB.isChecked();
-                }
-
+                isCheckBoxChecked(headHeavyCB);
             }
         });
 
         armsLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(armsLightCB.isChecked()){
-                    armsLightCB.setChecked(true);
-                    armsLightBoolean = armsLightCB.isChecked();
-                }
-
-                else if(!armsLightCB.isChecked()){
-                    armsLightCB.setChecked(false);
-                    armsLightBoolean = armsLightCB.isChecked();
-                }
-
+                isCheckBoxChecked(armsLightCB);
             }
         });
 
         armsHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(armsHeavyCB.isChecked()){
-                    armsHeavyCB.setChecked(true);
-                    armsHeavyBoolean = armsHeavyCB.isChecked();
-                }
+                isCheckBoxChecked(armsHeavyCB);
+            }
+        });
 
-                else if(!armsHeavyCB.isChecked()){
-                    armsHeavyCB.setChecked(false);
-                    armsHeavyBoolean = armsHeavyCB.isChecked();
-                }
+        bodyLightCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(bodyLightCB);
+            }
+        });
 
+        bodyHeavyCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(bodyHeavyCB);
+            }
+        });
+
+        waistLightCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(waistLightCB);
+            }
+        });
+
+        waistHeavyCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(waistHeavyCB);
+            }
+        });
+
+        legsLightCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(legsLightCB);
+            }
+        });
+
+        legsHeavyCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked(legsHeavyCB);
             }
         });
 
 
-    }
 
-
-    public void bodyLightCheckbox(View view){
-        if(bodyLightCB.isChecked()){
-            bodyLightCB.setChecked(true);
-            bodyLightBoolean = bodyLightCB.isChecked();
-        }
-
-        else if(!bodyLightCB.isChecked()){
-            bodyLightCB.setChecked(false);
-            bodyLightBoolean = armsLightCB.isChecked();
-        }
 
     }
 
-    public void bodyHeavyCheckbox(View view){
-        if(bodyHeavyCB.isChecked()){
-            bodyHeavyCB.setChecked(true);
-            bodyHeavyBoolean = bodyHeavyCB.isChecked();
+    //method that changes value of boolean put into SharedPreferences in save()-method according to whether the CheckBox is checked or not
+    public void isCheckBoxChecked(CheckBox cb){
+
+        for(HashMap.Entry<CheckBox, Boolean> entry : woundMap.entrySet()){
+            if(entry.getKey().isChecked()){
+                woundMap.put(entry.getKey(), true);
+                System.out.println("Yes");
+                System.out.println("Checkbox: " + entry.getKey());
+                System.out.println("Boolean: " + entry.getValue());
+            }
+
+            else {
+                woundMap.put(entry.getKey(), false);
+                System.out.println("No");
+                System.out.println("Checkbox: " + entry.getKey());
+                System.out.println("Boolean: " + entry.getValue());
+            }
+
         }
 
-        else if(!bodyHeavyCB.isChecked()){
-            bodyHeavyCB.setChecked(false);
-            bodyHeavyBoolean = armsHeavyCB.isChecked();
-        }
-    }
-
-    public void waistLightCheckbox(View view){
-        if(waistLightCB.isChecked()){
-            waistLightCB.setChecked(true);
-            waistLightBoolean = waistLightCB.isChecked();
-        }
-
-        else if(!waistLightCB.isChecked()){
-            waistLightCB.setChecked(false);
-            waistLightBoolean = waistLightCB.isChecked();
-        }
-
-    }
-
-    public void waistHeavyCheckbox(View view){
-        if(waistHeavyCB.isChecked()){
-            waistHeavyCB.setChecked(true);
-            waistHeavyBoolean = armsHeavyCB.isChecked();
-        }
-
-        else if(!waistHeavyCB.isChecked()){
-            waistHeavyCB.setChecked(false);
-            waistHeavyBoolean = armsHeavyCB.isChecked();
-        }
-    }
-
-    public void legsLightCheckbox(View view){
-        if(legsLightCB.isChecked()){
-            legsLightCB.setChecked(true);
-            legsLightBoolean = legsLightCB.isChecked();
-        }
-
-        else if(!legsLightCB.isChecked()){
-            legsLightCB.setChecked(false);
-            legsLightBoolean = legsLightCB.isChecked();
-        }
-
-    }
-
-    public void legsHeavyCheckbox(View view){
-        if(legsHeavyCB.isChecked()){
-            legsHeavyCB.setChecked(true);
-            legsHeavyBoolean = legsHeavyCB.isChecked();
-        }
-
-        else if(!legsHeavyCB.isChecked()){
-            legsHeavyCB.setChecked(false);
-            legsHeavyBoolean = legsHeavyCB.isChecked();
-        }
     }
 
     public void resetValue(EditText et){
@@ -357,12 +309,11 @@ public class ArmorFragment extends Fragment {
         }
     }
 
-
-
-    //savestated doesn't work right with the checkboxes - when you check a box, save, quit, open app, check two more boxes, save quit and open - it seems to toggle buttons in stead of preserve state? check "isChecked() and setChecked(boolean) - how do they work? need to fix several methods
-
+    //savestate
+    //TODO change boolean input.values to get from map
 
     public void save(){
+        System.out.println("Save button pressed");
 
         //get value from editText-view
         headValue = headEditText.getText().toString();
@@ -395,15 +346,17 @@ public class ArmorFragment extends Fragment {
             editor.putInt(legsKey, Integer.parseInt(legsValue));
         }
 
-        editor.putBoolean(headHeavy, headHeavyBoolean);
-        editor.putBoolean(armsLight, armsLightBoolean);
-        editor.putBoolean(armsHeavy, armsHeavyBoolean);
-        editor.putBoolean(bodyLight, bodyLightBoolean);
-        editor.putBoolean(bodyHeavy, bodyHeavyBoolean);
-        editor.putBoolean(waistLight, waistLightBoolean);
-        editor.putBoolean(waistHeavy, waistHeavyBoolean);
-        editor.putBoolean(legsLight, legsLightBoolean);
-        editor.putBoolean(legsHeavy, legsHeavyBoolean);
+
+        System.out.println("Save Head H Boolean:" + headHeavyBoolean);
+        editor.putBoolean(headHeavy, woundMap.get(headHeavyCB));
+        editor.putBoolean(armsLight, woundMap.get(armsLightCB));
+        editor.putBoolean(armsHeavy, woundMap.get(armsHeavyCB));
+        editor.putBoolean(bodyLight, woundMap.get(bodyLightCB));
+        editor.putBoolean(bodyHeavy, woundMap.get(bodyHeavyCB));
+        editor.putBoolean(waistLight, woundMap.get(waistLightCB));
+        editor.putBoolean(waistHeavy, woundMap.get(waistHeavyCB));
+        editor.putBoolean(legsLight, woundMap.get(legsLightCB));
+        editor.putBoolean(legsHeavy, woundMap.get(legsHeavyCB));
 
         editor.commit();
 
