@@ -46,37 +46,42 @@ public class SurvivalFragment extends Fragment {
         // Required empty public constructor
     }
 
-
-    // TODO: Do I need this int? Does it do anything?
     public static SurvivalFragment newInstance(int i) {
         SurvivalFragment fragment = new SurvivalFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_SURVIVAL, i);
+        //not sure this does anything
+        args.putInt(survival, fragment.currentSurvival);
+        args.putInt(insanity, fragment.currentInsanity);
         fragment.setArguments(args);
         return fragment;
     }
 
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        survivalPage = getArguments().getInt(ARG_SURVIVAL);
+        System.out.println("OnCreate (CI): " + currentInsanity);
+        //survivalPage = getArguments().getInt(ARG_SURVIVAL);
+        //The below getArguments() does nothing?
+        survivalPage = getArguments().getInt(survival);
+        survivalPage = getArguments().getInt(insanity);
+        System.out.println("OnCreate (CI): " + currentInsanity);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        System.out.println("OnCreateView: " + currentInsanity);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_survival, container, false);
+
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-        //view.findViewById().setOnClickListener();
 
         survivalValueID = (TextView) view.findViewById(R.id.survivalValueID);
         insanityValueID = (TextView) view.findViewById(R.id.insanityValueID);
@@ -150,34 +155,68 @@ public class SurvivalFragment extends Fragment {
         });
     }
 
+    //TODO make sure this works (on change of tabs it should resume incrementation and decrementation from last number on screen)
     public void updateSurvival(TextView view){
-        view.setText("" + currentSurvival);
+        System.out.println("UpdateSurvival: " + currentSurvival);
+        if(currentSurvival >= 0){
+            view.setText("" + currentSurvival);
+        }
+        else if(currentSurvival < 0){
+            currentSurvival = 0;
+            view.setText("" + currentSurvival);
+        };
+
+
     }
 
     public void updateInsanity(TextView view){
-        view.setText("" + currentInsanity);
+        System.out.println("Update insanity: " + currentInsanity);
+
+        if(currentInsanity >= 0){
+            view.setText("" + currentInsanity);
+        }
+        else if(currentInsanity < 0){
+            currentInsanity = 0;
+            view.setText("" + currentInsanity);
+        };
+
     }
 
 
     public void save() {
         String s = survivalValueID.getText().toString();
         String i = insanityValueID.getText().toString();
+        System.out.println("Save (surv): " + s);
+        System.out.println("Save (ins): " + i);
+
+        currentSurvival = Integer.parseInt(s);
+        currentInsanity = Integer.parseInt(i);
 
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putInt(survival, Integer.parseInt(s));
-        editor.putInt(insanity, Integer.parseInt(i));
+        editor.putInt(survival, currentSurvival);
+        editor.putInt(insanity, currentInsanity);
         editor.commit();
+
+        System.out.println("SP: " + sharedPreferences.toString());
 
     }
 
+    //TODO make sure this works (on change of tabs it should resume incrementation and decrementation from last number on screen)
+    //save-method saves the currect values - load method loads wrong values
     public void load() {
         //use  '"" + int' in order to set text as a String in textView - and int can be treated as int
 
         if (sharedPreferences.contains(survival)) {
-            survivalValueID.setText("" + sharedPreferences.getInt(survival, -1));
+            System.out.println("Load: " + currentSurvival);
+            currentSurvival = sharedPreferences.getInt(survival, -1);
+            System.out.println("Load: " + currentSurvival);
+            survivalValueID.setText("" + sharedPreferences.getInt(survival, currentSurvival));
         }
         if (sharedPreferences.contains(insanity)) {
-            insanityValueID.setText("" + sharedPreferences.getInt(insanity, -1));
+            System.out.println("Load: " + currentInsanity);
+            currentInsanity = sharedPreferences.getInt(insanity, -1);
+            System.out.println("Load: " + currentInsanity);
+            insanityValueID.setText("" + sharedPreferences.getInt(insanity, currentInsanity));
         }
 
 
