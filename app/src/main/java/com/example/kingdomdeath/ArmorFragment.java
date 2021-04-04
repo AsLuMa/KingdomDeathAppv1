@@ -3,6 +3,7 @@ package com.example.kingdomdeath;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -113,7 +114,9 @@ public class ArmorFragment extends Fragment {
     public static ArmorFragment newInstance(int i) {
         ArmorFragment fragment = new ArmorFragment();
         Bundle args = new Bundle();
+        //does the below do anything
         args.putInt(ARG_ARMOR, i);
+        System.out.println("I:" + i);
         fragment.setArguments(args);
         return fragment;
     }
@@ -121,6 +124,7 @@ public class ArmorFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //does the below do anything
         armorPage = getArguments().getInt(ARG_ARMOR);
         }
 
@@ -162,27 +166,23 @@ public class ArmorFragment extends Fragment {
                 armsHeavyCB = (CheckBox) view.findViewById(R.id.armsHeavyID),
                 bodyHeavyCB = (CheckBox) view.findViewById(R.id.bodyHeavyID),
                 waistHeavyCB = (CheckBox) view.findViewById(R.id.waistHeavyID),
-                legsHeavyCB = (CheckBox) view.findViewById(R.id.legsHeavyID
-                )
+                legsHeavyCB = (CheckBox) view.findViewById(R.id.legsHeavyID)
         );
 
         //Initialized savesavestaed - MODE_PRIVATE = data only accessible to app
         sharedPreferences = this.getActivity().getSharedPreferences(armorpref,
                 Context.MODE_PRIVATE);
 
-        woundMap.put(headHeavyCB, this.headHeavyBoolean);
-        woundMap.put(armsLightCB, this.armsLightBoolean);
-        woundMap.put(armsHeavyCB, this.armsHeavyBoolean);
-        woundMap.put(bodyLightCB, this.bodyLightBoolean);
-        woundMap.put(bodyHeavyCB, this.bodyHeavyBoolean);
-        woundMap.put(waistLightCB, this.waistLightBoolean);
-        woundMap.put(waistHeavyCB, this.waistHeavyBoolean);
-        woundMap.put(legsLightCB, this.legsLightBoolean);
-        woundMap.put(legsHeavyCB, this.legsHeavyBoolean);
-        System.out.println("After put: " + headHeavyBoolean);
-
-
-
+        woundMap.put(headHeavyCB, headHeavyBoolean);
+        woundMap.put(armsLightCB, armsLightBoolean);
+        woundMap.put(armsHeavyCB, armsHeavyBoolean);
+        woundMap.put(bodyLightCB, bodyLightBoolean);
+        woundMap.put(bodyHeavyCB, bodyHeavyBoolean);
+        woundMap.put(waistLightCB, waistLightBoolean);
+        woundMap.put(waistHeavyCB, waistHeavyBoolean);
+        woundMap.put(legsLightCB, legsLightBoolean);
+        woundMap.put(legsHeavyCB, legsHeavyBoolean);
+        //System.out.println("After put: " + headHeavyBoolean);
 
         load();
 
@@ -271,9 +271,6 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-
-
-
     }
 
     //method that changes value of boolean put into SharedPreferences in save()-method according to whether the CheckBox is checked or not
@@ -283,24 +280,25 @@ public class ArmorFragment extends Fragment {
             if(entry.getKey().isChecked()){
                 woundMap.put(entry.getKey(), true);
                 System.out.println("Yes");
-                System.out.println("Checkbox: " + entry.getKey());
-                System.out.println("Boolean: " + entry.getValue());
+                //System.out.println("Checkbox: " + entry.getKey());
+                //System.out.println("Boolean: " + entry.getValue());
             }
 
             else {
                 woundMap.put(entry.getKey(), false);
                 System.out.println("No");
-                System.out.println("Checkbox: " + entry.getKey());
-                System.out.println("Boolean: " + entry.getValue());
+                //System.out.println("Checkbox: " + entry.getKey());
+                //System.out.println("Boolean: " + entry.getValue());
             }
 
         }
 
     }
 
+
     public void resetValue(EditText et){
-        String value = "" + 0;
-        et.setText(value);
+        //removes all values and sets EditText back to hint-state
+        et.setText("");
     }
 
     public void resetCheckBox(CheckBox cb){
@@ -309,9 +307,7 @@ public class ArmorFragment extends Fragment {
         }
     }
 
-    //savestate
-    //TODO change boolean input.values to get from map
-
+    //saves values from editTexts and state of checkboxes
     public void save(){
         System.out.println("Save button pressed");
 
@@ -330,35 +326,61 @@ public class ArmorFragment extends Fragment {
             editor.putInt(headKey, Integer.parseInt(headValue));
         }
 
+        if(headValue.equals("")) {
+            editor.putInt(headKey, 0);
+        }
+
         if (!"".equals(armsValue)){
             editor.putInt(armsKey, Integer.parseInt(armsValue));
+        }
+
+        if(armsValue.equals("")){
+            editor.putInt(armsKey, 0);
         }
 
         if (!"".equals(bodyValue)){
             editor.putInt(bodyKey, Integer.parseInt(bodyValue));
         }
 
+        if(bodyValue.equals("")){
+            editor.putInt(bodyKey, 0);
+        }
+
         if (!"".equals(waistValue)){
             editor.putInt(waistKey, Integer.parseInt(waistValue));
+        }
+
+        if(waistValue.equals("")){
+            editor.putInt(waistKey, 0);
         }
 
         if (!"".equals(legsValue)){
             editor.putInt(legsKey, Integer.parseInt(legsValue));
         }
 
+        if(legsValue.equals("")){
+            editor.putInt(legsKey, 0);
+        }
 
-        System.out.println("Save Head H Boolean:" + headHeavyBoolean);
-        editor.putBoolean(headHeavy, woundMap.get(headHeavyCB));
-        editor.putBoolean(armsLight, woundMap.get(armsLightCB));
-        editor.putBoolean(armsHeavy, woundMap.get(armsHeavyCB));
-        editor.putBoolean(bodyLight, woundMap.get(bodyLightCB));
-        editor.putBoolean(bodyHeavy, woundMap.get(bodyHeavyCB));
-        editor.putBoolean(waistLight, woundMap.get(waistLightCB));
-        editor.putBoolean(waistHeavy, woundMap.get(waistHeavyCB));
-        editor.putBoolean(legsLight, woundMap.get(legsLightCB));
-        editor.putBoolean(legsHeavy, woundMap.get(legsHeavyCB));
+        //unboxing may produce NullpointerException
+        try {
+            editor.putBoolean(headHeavy, woundMap.get(headHeavyCB));
+            editor.putBoolean(armsLight, woundMap.get(armsLightCB));
+            editor.putBoolean(armsHeavy, woundMap.get(armsHeavyCB));
+            editor.putBoolean(bodyLight, woundMap.get(bodyLightCB));
+            editor.putBoolean(bodyHeavy, woundMap.get(bodyHeavyCB));
+            editor.putBoolean(waistLight, woundMap.get(waistLightCB));
+            editor.putBoolean(waistHeavy, woundMap.get(waistHeavyCB));
+            editor.putBoolean(legsLight, woundMap.get(legsLightCB));
+            editor.putBoolean(legsHeavy, woundMap.get(legsHeavyCB));
 
-        editor.commit();
+
+            editor.commit();
+        }
+
+            catch(Exception e){
+                System.out.println(e);
+        }
 
     }
 
@@ -399,13 +421,11 @@ public class ArmorFragment extends Fragment {
 }
 
 /*
-Old reset method:
-- for number
-headValue = "" + 0;
-headEditText.setText(headValue);
-
-- for checkbox
-if(headHeavyCB.isChecked()){
-headHeavyCB.setChecked(false);
+TODO
+Number entered in editText:
+- Line under input-field needs to wrap around number (max to digits input)
+- Grey text-color befor number is input, and after reset (black when number is entered) -
+- input: make blinking | disappear after number has been input (check out Focus and TextWatcher)
+- can
 
  */

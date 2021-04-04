@@ -96,19 +96,18 @@ public class MainActivity extends AppCompatActivity {
 
 /*
 TODO:
-- Read about non-deprecated way to do this
-- Understand tablayout-logic
-- FragmentPageAdapter provides a different Fragment for each 'page' (tab)
-- ViewPager = slide mellom skjermer - på sikt?
-- Refactor Armor-activity into ArmorFragment
-- Delete Armor-activity after refactor (all tabs should have same heading - KingdomDeath - means they are in the same activity)
+- Read about fragments (FragmentPageAdapter is deprecated)
+- Understand tablayout-logic (specifically passing of arguments and bundles)
 
-- Move Armor to MainActivity - refactor to fragment in MainActivity
-- MainActivity - make either tab or bottom nav menu
-- All Activities - add menu bar
-- Figure out how to save after refactor: same file? SharedPreferences or Database
-- New Feature: save all info input as an object (GSON), make editable list of characters (SQlite)
-- Fix save-state of Armor-class (checkboxes don't work correctly)
-- Limit input: survival and insanity shouldn't go below zero; no more than two numbers for armor (crashes on > integer value)
-- New branch "Refactor"  - branch icon bottom right bar - press checkout)
+- Delete Armor-activity after refactor
+
+- Add menu bar to MainActivity
+- Make flippable
+- ViewPager2 = slide mellom skjermer - på sikt?
+
+Saving info:
+- SharedPreferences - best practice (currently using one file per tab)
+- Research other ways to store data in tabs
+- want last opened tab to be the tab loaded onResume()
+- OnTabUnselected() and onTabReselected()?
 */

@@ -155,7 +155,7 @@ public class SurvivalFragment extends Fragment {
         });
     }
 
-    //TODO make sure this works (on change of tabs it should resume incrementation and decrementation from last number on screen)
+    //TODO refactor this and updateInsanity()
     public void updateSurvival(TextView view){
         System.out.println("UpdateSurvival: " + currentSurvival);
         if(currentSurvival >= 0){
@@ -224,6 +224,8 @@ public class SurvivalFragment extends Fragment {
 
 
 }
+
+//TODO refactor increment and decrement methods
 
 /*XML for skull button, in case of emergency:
         <ImageButton
