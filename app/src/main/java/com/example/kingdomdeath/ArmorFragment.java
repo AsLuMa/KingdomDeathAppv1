@@ -205,7 +205,10 @@ public class ArmorFragment extends Fragment {
                 for (CheckBox var : listCheckBoxWounds) {
                     resetCheckBox(var);
                 }
+
+
             }
+
         });
 
        headHeavyCB.setOnClickListener(new View.OnClickListener() {
@@ -213,12 +216,14 @@ public class ArmorFragment extends Fragment {
             public void onClick(View v) {
                 isCheckBoxChecked(headHeavyCB);
             }
+
         });
 
         armsLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(armsLightCB);
+
             }
         });
 
@@ -226,6 +231,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(armsHeavyCB);
+
             }
         });
 
@@ -233,6 +239,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(bodyLightCB);
+
             }
         });
 
@@ -240,6 +247,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(bodyHeavyCB);
+
             }
         });
 
@@ -247,6 +255,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(waistLightCB);
+                save();
             }
         });
 
@@ -254,6 +263,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(waistHeavyCB);
+
             }
         });
 
@@ -261,6 +271,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(legsLightCB);
+
             }
         });
 
@@ -268,6 +279,7 @@ public class ArmorFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked(legsHeavyCB);
+
             }
         });
 
@@ -299,11 +311,13 @@ public class ArmorFragment extends Fragment {
     public void resetValue(EditText et){
         //removes all values and sets EditText back to hint-state
         et.setText("");
+
     }
 
     public void resetCheckBox(CheckBox cb){
         if(cb.isChecked()){
             cb.setChecked(false);
+
         }
     }
 
@@ -322,45 +336,11 @@ public class ArmorFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
 
         //save value from editText-field to file
-        if (!"".equals(headValue)){
-            editor.putInt(headKey, Integer.parseInt(headValue));
-        }
-
-        if(headValue.equals("")) {
-            editor.putInt(headKey, 0);
-        }
-
-        if (!"".equals(armsValue)){
-            editor.putInt(armsKey, Integer.parseInt(armsValue));
-        }
-
-        if(armsValue.equals("")){
-            editor.putInt(armsKey, 0);
-        }
-
-        if (!"".equals(bodyValue)){
-            editor.putInt(bodyKey, Integer.parseInt(bodyValue));
-        }
-
-        if(bodyValue.equals("")){
-            editor.putInt(bodyKey, 0);
-        }
-
-        if (!"".equals(waistValue)){
-            editor.putInt(waistKey, Integer.parseInt(waistValue));
-        }
-
-        if(waistValue.equals("")){
-            editor.putInt(waistKey, 0);
-        }
-
-        if (!"".equals(legsValue)){
-            editor.putInt(legsKey, Integer.parseInt(legsValue));
-        }
-
-        if(legsValue.equals("")){
-            editor.putInt(legsKey, 0);
-        }
+        putEditTextValue(headKey, headValue, editor);
+        putEditTextValue(armsKey, armsValue, editor);
+        putEditTextValue(bodyKey, bodyValue, editor);
+        putEditTextValue(waistKey, waistValue, editor);
+        putEditTextValue(legsKey, legsValue, editor);
 
         //unboxing may produce NullpointerException
         try {
@@ -374,7 +354,6 @@ public class ArmorFragment extends Fragment {
             editor.putBoolean(legsLight, woundMap.get(legsLightCB));
             editor.putBoolean(legsHeavy, woundMap.get(legsHeavyCB));
 
-
             editor.commit();
         }
 
@@ -384,28 +363,24 @@ public class ArmorFragment extends Fragment {
 
     }
 
+    public void putEditTextValue(String key, String value, SharedPreferences.Editor e){
+        if(!"".equals(value)){
+            e.putInt(key, Integer.parseInt(value));
+        }
+
+        if(value.equals("")){
+            e.putInt(key, 0);
+        }
+    }
+
 
     public void load(){
 
-        if (sharedPreferences.contains(headKey)) {
-            headEditText.setText("" + sharedPreferences.getInt(headKey, -1));
-        }
-
-        if (sharedPreferences.contains(armsKey)) {
-            armsEditText.setText("" + sharedPreferences.getInt(armsKey, -1));
-        }
-
-        if (sharedPreferences.contains(bodyKey)) {
-            bodyEditText.setText("" + sharedPreferences.getInt(bodyKey, -1));
-        }
-
-        if (sharedPreferences.contains(waistKey)) {
-            waistEditText.setText("" + sharedPreferences.getInt(waistKey, -1));
-        }
-
-        if (sharedPreferences.contains(legsKey)) {
-            legsEditText.setText("" + sharedPreferences.getInt(legsKey, -1));
-        }
+        loadInt(headKey, headEditText);
+        loadInt(armsKey, armsEditText);
+        loadInt(bodyKey, bodyEditText);
+        loadInt(waistKey, waistEditText);
+        loadInt(legsKey, legsEditText);
 
         headHeavyCB.setChecked(sharedPreferences.getBoolean(headHeavy, headHeavyBoolean));
         armsLightCB.setChecked(sharedPreferences.getBoolean(armsLight, armsLightBoolean));
@@ -418,6 +393,13 @@ public class ArmorFragment extends Fragment {
         legsHeavyCB.setChecked(sharedPreferences.getBoolean(legsHeavy, legsHeavyBoolean));
 
     }
+
+    public void loadInt(String key, EditText et){
+        if(sharedPreferences.contains(key)){
+            et.setText("" + sharedPreferences.getInt(key, -1));
+        }
+
+    }
 }
 
 /*
@@ -425,7 +407,9 @@ TODO
 Number entered in editText:
 - Line under input-field needs to wrap around number (max to digits input)
 - Grey text-color befor number is input, and after reset (black when number is entered) -
-- input: make blinking | disappear after number has been input (check out Focus and TextWatcher)
-- can
+- input: make cursor disappear after number has been input (check out Focus and TextWatcher)
+- cursor needs to start to the right of the number?
+- call save method on every view - need to set onClick-listener for all editTexts if you do
+- write own action listener to shorten code - can we do this with a switch statement?
 
  */
