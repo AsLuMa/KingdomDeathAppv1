@@ -173,6 +173,12 @@ public class ArmorFragment extends Fragment {
         sharedPreferences = this.getActivity().getSharedPreferences(armorpref,
                 Context.MODE_PRIVATE);
 
+        //TODO this put()-method should throw nullpointer on first launch, but for some reason doesn't
+        //TODO update the following - check for null before putting boolean into map (make seperate method for this, call on all CheckBoxes)
+        //if(headHeavyCB == null){
+           // headHeavyCB = false;
+       // }
+
         woundMap.put(headHeavyCB, headHeavyBoolean);
         woundMap.put(armsLightCB, armsLightBoolean);
         woundMap.put(armsHeavyCB, armsHeavyBoolean);
@@ -214,7 +220,7 @@ public class ArmorFragment extends Fragment {
        headHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(headHeavyCB);
+                isCheckBoxChecked();
             }
 
         });
@@ -222,7 +228,7 @@ public class ArmorFragment extends Fragment {
         armsLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(armsLightCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -230,7 +236,7 @@ public class ArmorFragment extends Fragment {
         armsHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(armsHeavyCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -238,7 +244,7 @@ public class ArmorFragment extends Fragment {
         bodyLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(bodyLightCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -246,7 +252,7 @@ public class ArmorFragment extends Fragment {
         bodyHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(bodyHeavyCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -254,15 +260,14 @@ public class ArmorFragment extends Fragment {
         waistLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(waistLightCB);
-                save();
+                isCheckBoxChecked();
             }
         });
 
         waistHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(waistHeavyCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -270,7 +275,7 @@ public class ArmorFragment extends Fragment {
         legsLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(legsLightCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -278,7 +283,7 @@ public class ArmorFragment extends Fragment {
         legsHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isCheckBoxChecked(legsHeavyCB);
+                isCheckBoxChecked();
 
             }
         });
@@ -286,9 +291,14 @@ public class ArmorFragment extends Fragment {
     }
 
     //method that changes value of boolean put into SharedPreferences in save()-method according to whether the CheckBox is checked or not
-    public void isCheckBoxChecked(CheckBox cb){
+    public void isCheckBoxChecked(){
 
         for(HashMap.Entry<CheckBox, Boolean> entry : woundMap.entrySet()){
+
+        //    if(entry.getKey().equals(null)){
+        //        woundMap.put(entry.getKey(), false);
+         //       System.out.println("Null");
+         //   }
             if(entry.getKey().isChecked()){
                 woundMap.put(entry.getKey(), true);
                 System.out.println("Yes");
