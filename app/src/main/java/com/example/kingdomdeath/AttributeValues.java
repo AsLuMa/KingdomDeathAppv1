@@ -15,7 +15,7 @@ public class AttributeValues {
 
     //TODO check if we need the String nameOfAttribute for anything
 
-    public AttributeValues(String nameOfAttribute, String attributeValue, Boolean FA, Boolean token){
+    public AttributeValues(String attributeValue, Boolean FA, Boolean token){
         this.nameOfAttribute = nameOfAttribute;
         this.attributeValue = attributeValue;
         this.FA = FA;

@@ -225,7 +225,7 @@ public class ArmorFragment extends Fragment {
 
         });
 
-        armsLightCB.setOnClickListener(new View.OnClickListener() {
+       armsLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
@@ -233,7 +233,7 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-        armsHeavyCB.setOnClickListener(new View.OnClickListener() {
+       armsHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
@@ -241,7 +241,7 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-        bodyLightCB.setOnClickListener(new View.OnClickListener() {
+       bodyLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
@@ -249,7 +249,7 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-        bodyHeavyCB.setOnClickListener(new View.OnClickListener() {
+       bodyHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
@@ -257,22 +257,14 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-        waistLightCB.setOnClickListener(new View.OnClickListener() {
+       waistLightCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
             }
         });
 
-        waistHeavyCB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                isCheckBoxChecked();
-
-            }
-        });
-
-        legsLightCB.setOnClickListener(new View.OnClickListener() {
+       waistHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
@@ -280,7 +272,15 @@ public class ArmorFragment extends Fragment {
             }
         });
 
-        legsHeavyCB.setOnClickListener(new View.OnClickListener() {
+       legsLightCB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isCheckBoxChecked();
+
+            }
+        });
+
+       legsHeavyCB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 isCheckBoxChecked();
