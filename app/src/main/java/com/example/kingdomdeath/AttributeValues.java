@@ -8,28 +8,49 @@ import java.util.Map;
 
 public class AttributeValues {
 
-    private String name;
-    private EditText et;
-    private Map<CheckBox, Boolean> checkBoxBooleanMap;
-    private CheckBox cb1;
-    private CheckBox cb2;
-    private Boolean b1;
-    private Boolean b2;
+    private String nameOfAttribute;
+    private String attributeValue;
+    private Boolean FA;
+    private Boolean token;
 
-    public AttributeValues(String name, EditText value, CheckBox cb1, CheckBox cb2, Boolean b1, Boolean b2){
-        this.name = name;
-        this.et = value;
-        this.b1 = false;
-        this.b2 = false;
-        this.checkBoxBooleanMap = new HashMap<>();
-        putIntoMap(cb1, b1);
-        putIntoMap(cb2, b2);
+    //TODO check if we need the String nameOfAttribute for anything
+
+    public AttributeValues(String nameOfAttribute, String attributeValue, Boolean FA, Boolean token){
+        this.nameOfAttribute = nameOfAttribute;
+        this.attributeValue = attributeValue;
+        this.FA = FA;
+        this.token = token;
     }
 
-    public void putIntoMap(CheckBox cb, Boolean bl){
-        checkBoxBooleanMap.put(cb, bl);
+    public String getNameOfAttribute() {
+        return nameOfAttribute;
     }
 
+    public void setNameOfAttribute(String nameOfAttribute) {
+        this.nameOfAttribute = nameOfAttribute;
+    }
 
+    public String getAttributeValue() {
+        return attributeValue;
+    }
 
+    public void setAttributeValue(String attributeValue) {
+        this.attributeValue = attributeValue;
+    }
+
+    public Boolean getFA() {
+        return FA;
+    }
+
+    public void setFA(Boolean FA) {
+        this.FA = FA;
+    }
+
+    public Boolean getToken() {
+        return token;
+    }
+
+    public void setToken(Boolean token) {
+        this.token = token;
+    }
 }

@@ -336,7 +336,9 @@ public class ArmorFragment extends Fragment {
         System.out.println("Save button pressed");
 
         //get value from editText-view
+        System.out.println("Save before get from ET: " + headValue);
         headValue = headEditText.getText().toString();
+        System.out.println("Save after get from ET: " + headValue);
         armsValue = armsEditText.getText().toString();
         bodyValue = bodyEditText.getText().toString();
         waistValue = waistEditText.getText().toString();

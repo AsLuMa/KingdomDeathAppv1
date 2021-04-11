@@ -13,6 +13,8 @@ public class MainActivity extends AppCompatActivity {
     //logtag to keep track of app lifecycle (filter in logcat)
     private static final String TAG="ActivityState";
 
+    private AttributeValues av;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
 
         //Create an adapter that knows which fragment should be shown on each page
         final MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
-
 
         TabLayout tl = findViewById(R.id.tablayout);
 
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.i(TAG, "onDestroy");
     }
+
+
 }
 
 /*
