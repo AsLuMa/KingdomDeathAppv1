@@ -13,13 +13,14 @@ public class MainActivity extends AppCompatActivity {
     //logtag to keep track of app lifecycle (filter in logcat)
     private static final String TAG="ActivityState";
 
-    private AttributeValues av;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
 
         //Create an adapter that knows which fragment should be shown on each page
         final MyFragmentPagerAdapter adapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), MainActivity.this);
@@ -64,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(startArmor);
             }
         });*/
+
+    public String printAttributeValue(AttributeValues av){
+        return "Value: " + av.getAttributeValue() + " FA: " + av.getFA() + " Token: " + av.getToken();
+    }
 
 
     @Override
