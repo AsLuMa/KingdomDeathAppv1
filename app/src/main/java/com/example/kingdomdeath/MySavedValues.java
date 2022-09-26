@@ -2,6 +2,8 @@ package com.example.kingdomdeath;
 
 import android.content.SharedPreferences;
 
+//this class does nothing
+
 public class MySavedValues {
 
     private static int survival;

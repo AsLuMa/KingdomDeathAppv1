@@ -11,6 +11,12 @@
     <string name="resetButton">Reset</string>
     <string name="saveButton">Save</string>
 
+    <!-- Tab-titles -->
+
+    <string name="survivalTab">Survival</string>
+    <string name="armorTab">Armor</string>
+    <string name="AttributeTab">Attribute</string>
+
 
     <!-- Attribute fragment -->
     <string name="movement">Movement</string>
